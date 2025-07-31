@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const {comparePasswords} = require('../utils/authUtil');
+
 const register = async(req,res,next) => {
   try {
     const {name, email, password} = req.body;
@@ -67,4 +68,15 @@ const login = async(req,res,next) => {
   }
 }
 
-module.exports = {register, login};
+
+const getProfile = async(req,res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error: 'Internal Server Error'});
+  }
+};
+
+module.exports = {register, login, getProfile};
