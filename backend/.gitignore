@@ -1,0 +1,3 @@
+# These will be ignored by git and wont be tracked
+node_modules
+.env
