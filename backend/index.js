@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const userRoutes = require('./routes/userRoutes');
+const rideRoutes = require('./routes/rideRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger'); 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/users', userRoutes);
+app.use('/rides', rideRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT;
