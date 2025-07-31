@@ -15,7 +15,7 @@ const getRideDetails = async(req,res,next) => {
   }
 }
 
-const getRides = async(req,res,next) => {
+const getUserRides = async(req,res,next) => {
   try {
     
   } catch (error) {
@@ -31,4 +31,4 @@ const cancelRide = async(req,res,next) => {
   }
 }
 
-module.exports = {bookRide, }
+module.exports = {bookRide, getRideDetails, getUserRides, cancelRide};
