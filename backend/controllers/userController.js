@@ -39,12 +39,18 @@ const login = async(req,res,next) => {
   try {
     const {email, password} = req.body;
     const user = await User.findOne({email});
-    if(!user)
-      return res.status(401).json({error: "Invalid credentials"});
+     if (!user) {
+      const error = new Error("Invalid credentials");
+      error.statusCode = 401;
+      return next(error);
+    }
 
     const isPasswordMatching = await comparePasswords(password, user.password);
-    if(!isPasswordMatching)
-      return res.status(401).json({error: "Invalid credentials"});
+    if (!isPasswordMatching) {
+      const error = new Error("Invalid credentials");
+      error.statusCode = 401;
+      return next(error);
+    }
 
     //When both credentials are correct then generate a token
     const token = jwt.sign(
