@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -22,5 +23,20 @@ const UserSchema = new mongoose.Schema({
     default: 'user'
   },
 }, { timestamps: true });
+
+//Pre Hook runs before create or saving the document
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt); // hash it
+    next();
+  } catch (err) {
+    console.log("Error Hashing Password", err);
+    next(err);
+  }
+});
+
 
 module.exports = mongoose.model('User', UserSchema);
