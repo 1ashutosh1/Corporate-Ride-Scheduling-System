@@ -33,6 +33,22 @@ const bookRide = async (req, res, next) => {
 
 const getRideDetails = async (req, res, next) => {
   try {
+    const user = req.user;
+    const ride = await Ride.findById(req.params.id);
+    if(!ride){
+      const error = new Error("Ride not Found");
+      error.statusCode = 404;
+      return next(error);
+    }
+    
+    //convert ObjectId to string before comparison with the userId from req object because their types are different
+    if(ride.user.toString() !== user.id && user.role !== 'admin'){
+       const error = new Error("Not Authorized to view the details for this ride");
+       error.statusCode = 403;
+       return next(error);
+    }
+
+    return res.status(200).json(ride);
   } catch (error) {
     next(error);
   }
