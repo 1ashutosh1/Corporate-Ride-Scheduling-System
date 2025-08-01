@@ -40,6 +40,8 @@ const getRideDetails = async (req, res, next) => {
 
 const getUserRides = async (req, res, next) => {
   try {
+    const rides = await Ride.find({user: req.user.id});
+    res.status(200).json(rides);
   } catch (error) {
     next(error);
   }
