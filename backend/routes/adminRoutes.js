@@ -3,13 +3,13 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const isAdmin = require('../middleware/isAdmin');
 const {
-  getRidesByStatus,
   approveRide,
   rejectRide,
-  getAnalytics
+  getAnalytics,
+  getRidesByFilter
 } = require('../controllers/adminController');
 
-router.get('/rides', auth, isAdmin, getRidesByStatus);
+router.get('/rides', auth, isAdmin, getRidesByFilter);
 router.patch('/rides/:id/approve', auth, isAdmin, approveRide);
 router.patch('/rides/:id/reject', auth, isAdmin, rejectRide);
 router.get('/analytics/rides', auth, isAdmin, getAnalytics);

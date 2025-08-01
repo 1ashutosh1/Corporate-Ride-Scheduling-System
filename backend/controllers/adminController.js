@@ -1,10 +1,10 @@
 const AdminAction = require('../models/AdminAction');
 const Ride = require('../models/Ride');
 
-//if no status is provided in query params return all the rides 
-const getRidesByStatus = async (req, res, next) => {
+//if no filter is provided in query params return all the rides 
+const getRidesByFilter = async (req, res, next) => {
   try {
-    const {status} = req.query;
+    const {status, user, from, to} = req.query;
     const validStatus = ['pending', 'approved', 'cancelled'];
     if(status && !validStatus.includes(status)){
       const error = new Error('Not a valid status filter');
@@ -13,9 +13,24 @@ const getRidesByStatus = async (req, res, next) => {
     }
     
     const filter = {};
-    if(status) filter.status = status;
+    //Status Filter
+    if(status){
+      filter.status = status;
+    } 
+    
+    //User Filter
+    if(user){
+      filter.user = user;
+    }
 
-    //if there is no filter(no status) in that case it will return all the rides.
+    //Date range Filter
+    if(from || to){
+      filter.date = {};
+      if(from) filter.date.$gte = new Date(from);
+      if(to) filter.date.$lte = new Date(to);
+    }
+
+    //if there is no filter in that case it will return all the rides.
     const rides = await Ride.find(filter).populate('user', 'email');
     res.status(200).json(rides);
   } catch (err) {
@@ -135,4 +150,4 @@ const getAnalytics = async (req, res, next) => {
   }
 };
 
-module.exports = {getRidesByStatus, approveRide, rejectRide, getAnalytics};
+module.exports = {getRidesByFilter, approveRide, rejectRide, getAnalytics};
