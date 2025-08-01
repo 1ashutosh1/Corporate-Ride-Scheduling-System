@@ -89,10 +89,47 @@ const rejectRide = async (req, res, next) => {
   }
 };
 
-
+//Complex logic need to verify 
 const getAnalytics = async (req, res, next) => {
   try {
-    
+   const { from, to } = req.query;
+    const filter = {};
+
+    if (from || to) {
+      filter.date = {};
+      if (from) filter.date.$gte = new Date(from);
+      if (to) filter.date.$lte = new Date(to);
+    }
+
+    const allRides = await Ride.find(filter);
+
+    const totalRides = allRides.length;
+
+    const ridesByStatus = {
+      pending: 0,
+      approved: 0,
+      cancelled: 0
+    };
+
+    const ridesPerDay = {};
+
+    for (let ride of allRides) {
+      // Count status
+      if (ridesByStatus[ride.status] !== undefined) {
+        ridesByStatus[ride.status]++;
+      }
+
+      // Group by date
+      const date = ride.date.toISOString().split('T')[0];   //convert date object to ISOstring and get only the date part
+      if (!ridesPerDay[date]) ridesPerDay[date] = 0;
+      ridesPerDay[date]++;
+    }
+
+    res.status(200).json({
+      totalRides,
+      ridesByStatus,
+      ridesPerDay: Object.entries(ridesPerDay).map(([date, count]) => ({ date, count }))
+    });
   } catch (err) {
     next(err);
   }
