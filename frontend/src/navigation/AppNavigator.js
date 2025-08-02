@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
 import SignupScreen from '../screens/SignupScreen';
 import LoginScreen from '../screens/LoginScreen';
+import BookRideScreen from '../screens/BookRideScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,9 +26,9 @@ const AppNavigator = () => {
           </>
         ) : (
           <>
-            <Stack.Screen name="BookRide" />
-            <Stack.Screen name="MyRides" />
-            <Stack.Screen name="MyProfile" />
+            <Stack.Screen name="BookRide" component={BookRideScreen}/>
+            {/* <Stack.Screen name="MyRides" /> */}
+            {/* <Stack.Screen name="MyProfile" /> */}
           </>
         )}
       </Stack.Navigator>
