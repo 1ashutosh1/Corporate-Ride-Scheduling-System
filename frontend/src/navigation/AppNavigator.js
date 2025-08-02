@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import SignupScreen from '../screens/SignupScreen';
 import LoginScreen from '../screens/LoginScreen';
 import BookRideScreen from '../screens/BookRideScreen';
+import MyRidesScreen from '../screens/MyRidesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +28,7 @@ const AppNavigator = () => {
         ) : (
           <>
             <Stack.Screen name="BookRide" component={BookRideScreen}/>
-            {/* <Stack.Screen name="MyRides" /> */}
+            <Stack.Screen name="MyRides" component={MyRidesScreen}/>
             {/* <Stack.Screen name="MyProfile" /> */}
           </>
         )}
