@@ -80,6 +80,36 @@ router.post('/login', login);
 
 router.get('/profile', auth, getProfile);
 
+
+/**
+ * @swagger
+ * /users/update:
+ *   patch:
+ *     summary: Update current user's profile
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               oldPassword:
+ *                 type: string
+ *               newPassword:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Profile updated successfully
+ *       400:
+ *         description: Both passwords are required
+ *       401:
+ *         description: Old password is incorrect or unauthorized
+ */
 router.patch('/update', auth, updateProfile);
 
 module.exports = router;

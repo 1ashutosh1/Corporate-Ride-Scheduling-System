@@ -143,7 +143,35 @@ router.patch('/rides/:id/reject', auth, isAdmin, rejectRide);
  */
 router.get('/analytics/rides', auth, isAdmin, getAnalytics);
 
-
+/**
+ * @swagger
+ * /admin/users:
+ *   get:
+ *     summary: Get all users (admin only)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of all users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
+ */
 router.get('/users', auth, isAdmin, getAllUsers);
 
 module.exports = router;
