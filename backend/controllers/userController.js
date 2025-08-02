@@ -83,4 +83,39 @@ const getProfile = async(req,res,next) => {
   }
 };
 
-module.exports = {register, login, getProfile};
+const updateProfile = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const { name, oldPassword, newPassword } = req.body;
+
+    const user = await User.findById(userId);
+    if (name) {
+      user.name = name;
+    }
+
+    if (oldPassword || newPassword) {
+      if (!oldPassword || !newPassword) {
+        const error = new Error("Both password are required");
+        error.statusCode = 400;
+        return next(error);
+      }
+
+      const isMatch = await comparePasswords(oldPassword, user.password);
+      if (!isMatch) {
+        const error = new Error("Old password is incorrect");
+        error.statusCode = 401;
+        return next(error);
+      }
+
+      //Pre hook will hash this newPassword
+      user.password = newPassword;
+    }
+
+    await user.save();
+    res.status(200).json({ message: "Profile updated Successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {register, login, getProfile, updateProfile};
