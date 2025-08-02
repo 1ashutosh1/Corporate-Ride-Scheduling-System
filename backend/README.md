@@ -125,6 +125,10 @@ backend/
 
 Made with ❤️ by [Ashutosh Tripathi](https://github.com/1ashutosh1)
 
+## 🤝 Contribution
+
+If you find a bug or have an idea to improve this project, contributions are welcome!  
+Feel free to fork the repo, open a pull request, or raise an issue 🚀
 
 ## License  
 
