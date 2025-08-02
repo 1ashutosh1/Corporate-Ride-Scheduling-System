@@ -12,6 +12,7 @@ import {
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Toast from "react-native-toast-message";
 import API from "../api";
+import { Ionicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get("window");
 
@@ -79,10 +80,13 @@ const BookRideScreen = ({ navigation }) => {
         style={styles.input}
       />
 
+
+      <Text style={styles.dateMessage}>Pick a date and time for your ride:</Text>
       <TouchableOpacity
         style={styles.dateButton}
         onPress={() => setShowPicker(true)}
       >
+        <Ionicons name="calendar" size={22} color="#555" style={{ marginRight: 8 }} />
         <Text style={styles.dateButtonText}>{rideTime.toLocaleString()}</Text>
       </TouchableOpacity>
 
@@ -125,15 +129,32 @@ const styles = StyleSheet.create({
     height: height * 0.065,
     fontSize: height * 0.02,
   },
+  dateMessage: {
+    fontSize: height * 0.018,
+    color: '#555',
+    marginBottom: height * 0.01,
+    textAlign: 'center',
+  },
   dateButton: {
-    backgroundColor: "#eee",
+    backgroundColor: '#8a919fff',
+    borderWidth: 1,
+    borderColor: '#4b64a3ff',
     padding: height * 0.02,
-    borderRadius: 5,
+    borderRadius: 8,
     marginBottom: height * 0.03,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#b3c7f9',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   dateButtonText: {
     textAlign: "center",
     fontSize: height * 0.022,
+    color: '#222',
   },
   bookButton: {
     backgroundColor: "#28a745",
