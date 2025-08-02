@@ -12,6 +12,7 @@ import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
 import API from '../api';
 import { AuthContext } from '../context/AuthContext';
+import { validateEmail, validatePassword } from '../utils/Validation';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,12 +21,30 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleLogin = async () => {
+    setEmailError('');
+    setPasswordError('');
+
     if (!email || !password) {
       Toast.show({ type: 'error', text1: 'Fill in all fields' });
       return;
     }
+    
+    let ok = true;
+    if (!validateEmail(email)) {
+      setEmailError('Invalid email format');
+      ok = false;
+    }
+  
+    if (!validatePassword(password)) {
+      setPasswordError('Password must be ≥6 chars, include letters & numbers');
+      ok = false;
+    }
+   
+    if (!ok) return;
 
     try {
       // console.log('BASE URL:', process.env.EXPO_PUBLIC_API_BASE_URL);
@@ -49,16 +68,26 @@ const LoginScreen = ({ navigation }) => {
         placeholder="Email"
         autoCapitalize="none"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(t) => {
+          setEmail(t);
+          if (emailError) setEmailError('');
+        }}
         style={styles.input}
       />
+
+      {emailError ? (
+        <Text style={styles.errorText}>{emailError}</Text>
+      ) : null}
 
       <View style={styles.passwordContainer}>
         <TextInput
           placeholder="Password"
           secureTextEntry={!showPassword}
           value={password}
-          onChangeText={setPassword}
+          onChangeText={(t) => {
+          setPassword(t);
+          if (passwordError) setPasswordError('');
+        }}
           style={styles.passwordInput}
         />
         <TouchableOpacity
@@ -72,6 +101,10 @@ const LoginScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
       </View>
+
+     {passwordError ? (
+        <Text style={styles.errorText}>{passwordError}</Text>
+      ) : null}
 
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Login</Text>
@@ -144,5 +177,11 @@ const styles = StyleSheet.create({
     color: 'blue',
     textAlign: 'center',
     fontSize: height * 0.018,
+  },
+  errorText: {
+    color: '#dc3545',                 
+    fontSize: height * 0.017,         
+    marginBottom: height * 0.015,     
+    marginTop: -height * 0.005,       
   },
 });

@@ -11,6 +11,7 @@ import API from "../api";
 import Toast from "react-native-toast-message";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { validateEmail, validatePassword } from "../utils/Validation";
 
 const { width, height } = Dimensions.get("window");
 
@@ -19,12 +20,31 @@ const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleRegister = async () => {
+    setEmailError("");
+    setPasswordError("");
+
     if (!name || !email || !password) {
       Toast.show({ type: "error", text1: "Fill in all fields" });
       return;
     }
+    
+    let valid = true;
+
+    if (!validateEmail(email)) {
+      setEmailError("Enter a valid email address");
+      valid = false;
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError("Password must be ≥6 chars and include a number and a letter");
+      valid = false;
+    }
+
+    if (!valid) return;
 
     try {
       await API.post("/users/register", { name, email, password });
@@ -53,15 +73,26 @@ const SignupScreen = ({ navigation }) => {
         placeholder="Email"
         autoCapitalize="none"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(t) => {
+          setEmail(t);
+          if (emailError) setEmailError("");
+        }}
         style={styles.input}
       />
+
+      {emailError ? (
+        <Text style={styles.errorText}>{emailError}</Text>
+      ) : null}
+
       <View style={styles.passwordContainer}>
         <TextInput
           placeholder="Password"
           secureTextEntry={!showPassword}
           value={password}
-          onChangeText={setPassword}
+          onChangeText={(t) => {
+            setPassword(t);
+            if (passwordError) setPasswordError("");
+          }}
           style={styles.passwordInput}
         />
         <TouchableOpacity
@@ -75,6 +106,10 @@ const SignupScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
       </View>
+      
+      {passwordError ? (
+        <Text style={styles.errorText}>{passwordError}</Text>
+      ) : null}
 
       <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
         <Text style={styles.registerButtonText}>Signup</Text>
@@ -152,5 +187,11 @@ const styles = StyleSheet.create({
     color: "blue",
     textAlign: "center",
     fontSize: height * 0.018,
+  },
+  errorText: {
+    color: "#dc3545",
+    fontSize: height * 0.017,
+    marginBottom: height * 0.015,
+    marginTop: -height * 0.005,
   },
 });
