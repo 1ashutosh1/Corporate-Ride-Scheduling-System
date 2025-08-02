@@ -58,7 +58,7 @@ Corporate Ride Scheduling System enables:
 - **Frontend:** Expo (see `frontend/README.md` for details)
 - **Backend:** Node.js/Express (see `backend/README.md` for details)
 - **Live Backend:** [https://corporate-ride-scheduling-system-backend.onrender.com](https://corporate-ride-scheduling-system-backend.onrender.com)
-- **App Link:** [Download the App here](#) <!-- Replace # with your actual app link -->
+- **App Link:** [Download the App here](https://drive.google.com/file/d/1TnxqHoYbBaDAYxZvwf6Fo6K2JpTfg5ym/view?usp=sharing)
 
 ---
 
