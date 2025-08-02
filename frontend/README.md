@@ -76,8 +76,12 @@ EXPO_PUBLIC_API_BASE_URL=https://corporate-ride-scheduling-system-backend.onrend
 # or for local development
 # EXPO_PUBLIC_API_BASE_URL=http://<your system ip>:<port_number>
 
+
 # Start in development (native)
 npm start
+
+# Build Android APK (EAS Build)
+npx eas build -p android --profile preview
 
 ```
 
@@ -123,13 +127,13 @@ frontend/
 
 ## ✅ Scope for Improvement
 
-| Area                 | Suggestion                                              |
-| -------------------- | ------------------------------------------------------- |
-| UI polish            | Add animations (Framer Motion), improved theming        |
-| Form validation      | Integrate Formik + Yup for richer input validation      |
-| Offline support      | Cache rides locally, queue actions when offline         |
-| Push notifications   | Real-time updates using Expo Notifications              |
-| Graphing             | Replace daily stats list with dynamic charts (Recharts) |
+| Area               | Suggestion                                              |
+| ------------------ | ------------------------------------------------------- |
+| UI polish          | Add animations (Framer Motion), improved theming        |
+| Form validation    | Integrate Formik + Yup for richer input validation      |
+| Offline support    | Cache rides locally, queue actions when offline         |
+| Push notifications | Real-time updates using Expo Notifications              |
+| Graphing           | Replace daily stats list with dynamic charts (Recharts) |
 
 ---
 
