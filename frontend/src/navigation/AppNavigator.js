@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
+import SignupScreen from '../screens/SignupScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,8 +15,8 @@ const AppNavigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: true }}>
         {!user ? (
           <>
-            <Stack.Screen name="Login"  />
-            <Stack.Screen name="Register" />
+            <Stack.Screen name="Signup" component={SignupScreen}/>
+            <Stack.Screen name="Login"  component={LoginScreen}/>
           </>
         ) : user.role === 'admin' ? (
           <>
