@@ -137,8 +137,6 @@ const styles = StyleSheet.create({
   },
   dateButton: {
     backgroundColor: '#8a919fff',
-    borderWidth: 1,
-    borderColor: '#4b64a3ff',
     padding: height * 0.02,
     borderRadius: 8,
     marginBottom: height * 0.03,
