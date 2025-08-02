@@ -9,6 +9,7 @@ import AdminDashboardScreen from "../screens/AdminDashboardScreen";
 import AnalyticsScreen from "../screens/AnalyticsScreen";
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
+import MyProfileScreen from "../screens/MyProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();
@@ -30,7 +31,7 @@ export default function DrawerNavigator() {
           <>
             <Drawer.Screen name="BookRide" component={BookRideScreen} />
             <Drawer.Screen name="MyRides" component={MyRidesScreen} />
-            {/* <Drawer.Screen name="MyProfile" /> */}
+            <Drawer.Screen name="MyProfile" component={MyProfileScreen}/>
           </>
         )}
 
