@@ -6,6 +6,7 @@ import SignupScreen from '../screens/SignupScreen';
 import LoginScreen from '../screens/LoginScreen';
 import BookRideScreen from '../screens/BookRideScreen';
 import MyRidesScreen from '../screens/MyRidesScreen';
+import AdminDashboardScreen from '../screens/AdminDashboardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,8 +23,8 @@ const AppNavigator = () => {
           </>
         ) : user.role === 'admin' ? (
           <>
-            <Stack.Screen name="AdminDashboard" />
-            <Stack.Screen name="Analytics" />
+            <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen}/>
+            {/* <Stack.Screen name="Analytics" /> */}
           </>
         ) : (
           <>

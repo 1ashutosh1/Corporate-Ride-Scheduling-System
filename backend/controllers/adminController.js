@@ -1,5 +1,6 @@
 const AdminAction = require('../models/AdminAction');
 const Ride = require('../models/Ride');
+const User = require('../models/User');
 
 //if no filter is provided in query params return all the rides 
 const getRidesByFilter = async (req, res, next) => {
@@ -150,4 +151,13 @@ const getAnalytics = async (req, res, next) => {
   }
 };
 
-module.exports = {getRidesByFilter, approveRide, rejectRide, getAnalytics};
+const getAllUsers = async(req, res, next) => {
+  try {
+    const users = await User.find({}, '_id name email');
+    return res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {getRidesByFilter, approveRide, rejectRide, getAnalytics, getAllUsers};

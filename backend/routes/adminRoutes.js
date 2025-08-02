@@ -6,7 +6,8 @@ const {
   approveRide,
   rejectRide,
   getAnalytics,
-  getRidesByFilter
+  getRidesByFilter,
+  getAllUsers
 } = require('../controllers/adminController');
 
 /**
@@ -141,5 +142,8 @@ router.patch('/rides/:id/reject', auth, isAdmin, rejectRide);
  *         description: Forbidden
  */
 router.get('/analytics/rides', auth, isAdmin, getAnalytics);
+
+
+router.get('/users', auth, isAdmin, getAllUsers);
 
 module.exports = router;
