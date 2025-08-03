@@ -15,6 +15,14 @@ Corporate Ride Scheduling System enables:
 
 ---
 
+## 🎥 Video Tutorial
+
+Watch a full walkthrough of the app here:
+
+- [Video Tutorial (Google Drive)](https://drive.google.com/file/d/1QSELqBB-vXnNYlpAKc0y0eKmpeyCmMFk/view?usp=sharing)
+
+---
+
 ## 📱 Screenshots
 
 <p align="center">
@@ -59,6 +67,11 @@ Corporate Ride Scheduling System enables:
 - **Backend:** Node.js/Express (see `backend/README.md` for details)
 - **Live Backend:** [https://corporate-ride-scheduling-system-backend.onrender.com](https://corporate-ride-scheduling-system-backend.onrender.com)
 - **App Link:** [Download the App here](https://drive.google.com/file/d/1TnxqHoYbBaDAYxZvwf6Fo6K2JpTfg5ym/view?usp=sharing)
+
+> **Note:**
+>
+> - After downloading, the app may take some time to install depending on your device and internet speed.
+> - Make sure to enable installation from unknown sources in your device settings to allow the app to install successfully.
 
 ---
 
