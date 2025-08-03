@@ -66,12 +66,24 @@ Watch a full walkthrough of the app here:
 - **Frontend:** Expo (see `frontend/README.md` for details)
 - **Backend:** Node.js/Express (see `backend/README.md` for details)
 - **Live Backend:** [https://corporate-ride-scheduling-system-backend.onrender.com](https://corporate-ride-scheduling-system-backend.onrender.com)
+
 - **App Link:** [Download the App here](https://drive.google.com/file/d/1TnxqHoYbBaDAYxZvwf6Fo6K2JpTfg5ym/view?usp=sharing)
 
 > **Note:**
 >
 > - After downloading, the app may take some time to install depending on your device and internet speed.
 > - Make sure to enable installation from unknown sources in your device settings to allow the app to install successfully.
+
+---
+
+## 🚀 Try the App on Expo Go
+
+Scan the QR code below using the **Expo Go** app:
+
+![Expo QR Code](frontend/assets/qr/permanent_QR.svg)
+
+> You do **not** need to install the app directly on your phone. Just scan the QR code in Expo Go and you can instantly access and use the app.
+> Make sure you have the [Expo Go app](https://expo.dev/client) installed on your phone.
 
 ---
 
